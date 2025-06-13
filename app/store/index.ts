@@ -1,0 +1,19 @@
+import { configureStore } from '@reduxjs/toolkit';
+import { formSlice } from './slices/formSlice';
+import { persistanceMiddleware } from './middleware/persistanceMiddleware';
+
+export const store = configureStore({
+  reducer: {
+    [formSlice.name]: formSlice.reducer,
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        // Ignoriere diese Action-Typen für die Serialisierbarkeits-Checks
+        ignoredActions: ['persist/PERSIST', 'persist/REHYDRATE'],
+      },
+    }).concat(persistanceMiddleware),
+});
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch; 

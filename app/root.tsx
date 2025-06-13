@@ -5,10 +5,14 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  NavLink,
 } from "react-router";
 
 import type { Route } from "./+types/root";
 import "./app.css";
+import { Toaster } from "./components/ui/sonner";
+import { Provider } from 'react-redux';
+import { store } from './store';
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -33,7 +37,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        {children}
+        <Provider store={store}>
+          {children}
+        </Provider>
+        <Toaster />
         <ScrollRestoration />
         <Scripts />
       </body>
@@ -42,7 +49,54 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  return <Outlet />;
+  return (
+    <div>
+      <nav className="bg-gray-100 dark:bg-gray-900 p-4 flex gap-4 shadow">
+        <NavLink
+          to="/"
+          className={({ isActive }) =>
+            isActive
+              ? "text-blue-900 dark:text-blue-200 font-bold underline"
+              : "text-blue-700 dark:text-blue-400 hover:underline"
+          }
+          end
+        >
+          Home
+        </NavLink>
+        <NavLink
+          to="/test1"
+          className={({ isActive }) =>
+            isActive
+              ? "text-blue-900 dark:text-blue-200 font-bold underline"
+              : "text-blue-700 dark:text-blue-400 hover:underline"
+          }
+        >
+          Test 1
+        </NavLink>
+        <NavLink
+          to="/test2"
+          className={({ isActive }) =>
+            isActive
+              ? "text-blue-900 dark:text-blue-200 font-bold underline"
+              : "text-blue-700 dark:text-blue-400 hover:underline"
+          }
+        >
+          Test 2
+        </NavLink>
+        <NavLink
+          to="/test3"
+          className={({ isActive }) =>
+            isActive
+              ? "text-blue-900 dark:text-blue-200 font-bold underline"
+              : "text-blue-700 dark:text-blue-400 hover:underline"
+          }
+        >
+          Test 3
+        </NavLink>
+      </nav>
+      <Outlet />
+    </div>
+  );
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
