@@ -11,7 +11,7 @@ export interface FormState {
   };
 }
 
-const initialState: FormState = {
+export const initialState: FormState = {
   personsForm: null,
   bankForm: null,
   lastUpdated: {
@@ -48,7 +48,14 @@ export const formSlice = createSlice({
     },
     // Action für das Laden der Daten aus dem Storage
     hydrateForms: (state, action: PayloadAction<Partial<FormState>>) => {
-      return { ...state, ...action.payload };
+      return { 
+        ...state,
+        ...action.payload,
+        lastUpdated: {
+          personsForm: Date.now(),
+          bankForm: Date.now(),
+        },
+      };
     },
   },
 });

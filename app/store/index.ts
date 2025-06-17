@@ -1,6 +1,9 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { formSlice } from './slices/formSlice';
-import { persistanceMiddleware } from './middleware/persistanceMiddleware';
+import { configureStore } from "@reduxjs/toolkit";
+import { formSlice, initialState } from "./slices/formSlice";
+import {
+  loadFromStorage,
+  persistanceMiddleware,
+} from "./middleware/persistanceMiddleware";
 
 export const store = configureStore({
   reducer: {
@@ -10,10 +13,16 @@ export const store = configureStore({
     getDefaultMiddleware({
       serializableCheck: {
         // Ignoriere diese Action-Typen für die Serialisierbarkeits-Checks
-        ignoredActions: ['persist/PERSIST', 'persist/REHYDRATE'],
+        ignoredActions: ["persist/PERSIST", "persist/REHYDRATE"],
       },
     }).concat(persistanceMiddleware),
+  preloadedState: {
+    [formSlice.name]: {
+      ...initialState,
+      ...loadFromStorage(),
+    },
+  },
 });
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch; 
+export type StoreState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
