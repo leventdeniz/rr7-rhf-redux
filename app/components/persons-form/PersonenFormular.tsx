@@ -1,5 +1,6 @@
 import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { v4 as uuid } from 'uuid';
 
 import { Button } from "../ui/button";
 import { FormField } from "./FormField";
@@ -19,7 +20,7 @@ export default function PersonenFormular({ defaultValues }: PersonenFormularProp
     handleSubmit,
   } = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
-    defaultValues: defaultValues ?? { personen: [{ vorname: "", nachname: "", adresse: { strasse: "", hausnummer: "", plz: "", stadt: "" }, geburtsdatum: "", telefonnummer: "" }] },
+    defaultValues: defaultValues ?? { personen: [{ key: uuid(), vorname: "", nachname: "", adresse: { strasse: "", hausnummer: "", plz: "", stadt: "" }, geburtsdatum: "", telefonnummer: "" }] },
   });
 
   const { fields, append, remove } = useFieldArray({
@@ -104,7 +105,7 @@ export default function PersonenFormular({ defaultValues }: PersonenFormularProp
           )}
         </div>
       ))}
-      <Button type="button" onClick={() => append({ vorname: "", nachname: "", adresse: { strasse: "", hausnummer: "", plz: "", stadt: "" }, geburtsdatum: "", telefonnummer: "" })}>
+      <Button type="button" onClick={() => append({ key: uuid(), vorname: "", nachname: "", adresse: { strasse: "", hausnummer: "", plz: "", stadt: "" }, geburtsdatum: "", telefonnummer: "" })}>
         Weitere Person hinzufügen
       </Button>
       <Button type="submit" className="ml-4">Absenden</Button>

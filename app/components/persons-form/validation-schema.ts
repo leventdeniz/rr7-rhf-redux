@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 export const personSchema = z.object({
+    key: z.string().min(1, "Key ist erforderlich"),
     vorname: z.string().min(1, "Vorname ist erforderlich"),
     nachname: z.string().min(1, "Nachname ist erforderlich"),
     adresse: z.object({
