@@ -138,11 +138,11 @@ body {
 /* ============================= */
 
 /* resets */
-/* ::view-transition-group(*),
+::view-transition-group(*),
 ::view-transition-new(*),
 ::view-transition-old(*) {
-  animation-name: none;
-} */
+  animation-duration: 450ms;
+}
 
 ::view-transition-old(.slide-in) {
   animation: 450ms ease both pop-move-out-right;

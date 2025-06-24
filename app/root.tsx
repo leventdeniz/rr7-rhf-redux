@@ -58,6 +58,7 @@ export default function App() {
     <div>
       <nav className="bg-gray-100 dark:bg-gray-900 p-4 flex gap-4 shadow">
         <NavLink
+        prefetch="viewport"
           to="/"
           className={({ isActive }) =>
             isActive
@@ -78,6 +79,7 @@ export default function App() {
           Home
         </NavLink>
         <NavLink
+          prefetch="viewport"
           to="/test1"
           className={({ isActive }) =>
             isActive
@@ -98,6 +100,7 @@ export default function App() {
           Test 1
         </NavLink>
         <NavLink
+          prefetch="viewport"
           to="/test2"
           className={({ isActive }) =>
             isActive
@@ -118,6 +121,7 @@ export default function App() {
           Test 2
         </NavLink>
         <NavLink
+          prefetch="viewport"
           to="/test3"
           className={({ isActive }) =>
             isActive
