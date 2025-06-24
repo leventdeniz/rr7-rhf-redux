@@ -6,7 +6,6 @@ import { Button } from "../ui/button";
 import { FormField } from "./FormField";
 
 import { formSchema, type FormSchema } from "./validation-schema";
-import { ReduxFormWatcher } from "./ReduxFormWatcher";
 import IconTrash from '~/components/icons/icon-trash';
 
 // Props-Typ für defaultValues
@@ -34,7 +33,6 @@ export default function PersonenFormular({ defaultValues }: PersonenFormularProp
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 w-full max-w-xl">
-      <ReduxFormWatcher control={control} />
       {fields.map((field, index) => (
         <div key={field.id} className="border rounded-lg p-4 mb-4 relative">
           <FormField

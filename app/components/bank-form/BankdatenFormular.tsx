@@ -5,7 +5,6 @@ import { Button } from "../ui/button";
 import { BankFormField } from "./BankFormField";
 
 import { bankFormSchema, type BankFormSchema } from "./validation-schema";
-import { ReduxBankFormWatcher } from "./ReduxBankFormWatcher";
 import IconTrash from '~/components/icons/icon-trash';
 
 export type BankdatenFormularProps = {
@@ -32,7 +31,6 @@ export default function BankdatenFormular({ defaultValues }: BankdatenFormularPr
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 w-full max-w-xl">
-      <ReduxBankFormWatcher control={control} />
       {fields.map((field, index) => (
         <div key={field.id} className="border rounded-lg p-4 mb-4 relative">
           <BankFormField

@@ -8,11 +8,15 @@ import {
   NavLink,
 } from "react-router";
 
+
 import type { Route } from "./+types/root";
 import "./app.css";
 import { Toaster } from "./components/ui/sonner";
-import { Provider } from 'react-redux';
-import { store } from './store';
+import { QueryClientProvider } from '@tanstack/react-query';
+import queryClient from '~/data-domain/query-client';
+
+import { unstable_addTransitionType as addTransitionType, startTransition } from 'react';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -37,9 +41,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        <Provider store={store}>
+        <QueryClientProvider client={queryClient}>
           {children}
-        </Provider>
+          <ReactQueryDevtools initialIsOpen={false} />
+        </QueryClientProvider>
         <Toaster />
         <ScrollRestoration />
         <Scripts />
@@ -59,7 +64,16 @@ export default function App() {
               ? "text-blue-900 dark:text-blue-200 font-bold underline"
               : "text-blue-700 dark:text-blue-400 hover:underline"
           }
-          end
+          onClick={(event) => {
+            startTransition(() => {
+            // check if active via aria-current="page"
+            if (event.currentTarget.getAttribute("aria-current") === "page") {
+              addTransitionType("slide-out");
+            } else {
+                addTransitionType("slide-in");
+              }
+            });
+          }}
         >
           Home
         </NavLink>
@@ -70,6 +84,16 @@ export default function App() {
               ? "text-blue-900 dark:text-blue-200 font-bold underline"
               : "text-blue-700 dark:text-blue-400 hover:underline"
           }
+          onClick={(event) => {
+            startTransition(() => {
+            // check if active via aria-current="page"
+            if (event.currentTarget.getAttribute("aria-current") === "page") {
+              addTransitionType("slide-out");
+            } else {
+                addTransitionType("slide-in");
+              }
+            });
+          }}
         >
           Test 1
         </NavLink>
@@ -80,6 +104,16 @@ export default function App() {
               ? "text-blue-900 dark:text-blue-200 font-bold underline"
               : "text-blue-700 dark:text-blue-400 hover:underline"
           }
+          onClick={(event) => {
+            startTransition(() => {
+            // check if active via aria-current="page"
+            if (event.currentTarget.getAttribute("aria-current") === "page") {
+              addTransitionType("slide-out");
+            } else {
+                addTransitionType("slide-in");
+              }
+            });
+          }}
         >
           Test 2
         </NavLink>
@@ -90,6 +124,16 @@ export default function App() {
               ? "text-blue-900 dark:text-blue-200 font-bold underline"
               : "text-blue-700 dark:text-blue-400 hover:underline"
           }
+          onClick={(event) => {
+            startTransition(() => {
+            // check if active via aria-current="page"
+            if (event.currentTarget.getAttribute("aria-current") === "page") {
+              addTransitionType("slide-out");
+            } else {
+              addTransitionType("slide-in");
+              }
+            });
+          }}
         >
           Test 3
         </NavLink>
