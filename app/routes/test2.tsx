@@ -6,7 +6,6 @@ import {unstable_ViewTransition as ViewTransition} from 'react';
 const FormWrapper = () => {
   const { data } = useGetPersonsSuspenseQuery({});
 
-  // API-Daten direkt verwenden - keine Transformation nötig
   const formData = data?.data ? { persons: data.data } : null;
 
   return <PersonenFormular defaultValues={formData} />;
